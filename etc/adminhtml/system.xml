@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/system_file.xsd">
+    <system>
+        <section id="veezue_imageimporter" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Veezue ImageImporter</label>
+            <tab>general</tab>
+            <resource>Netzkollektiv_VeezueImporter::config_veezue_imageimporter</resource>
+
+            <!-- Base URL Configuration -->
+            <group id="general_settings" translate="label" type="text"  sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="base_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Base URL</label>
+                    <comment>Enter the base URL for the web service</comment>
+                </field>
+                <field id="cnf" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Config Key</label>
+                    <comment>Config Key</comment>
+                </field>
+            </group>
+
+            <!-- Dynamic Scene IDs -->
+            <group id="scene_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Scene Configuration</label>
+                <field id="scene_ids" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Scene IDs</label>
+                    <comment>Select scene IDs retrieved from the web service</comment>
+                    <source_model>Netzkollektiv\VeezueImporter\Model\Config\Source\SceneIds</source_model>
+                </field>
+                <field id="base_image" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Base Image Scene Id</label>
+                </field>
+                <field id="small_image" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Small Image Scene Id</label>
+                </field>
+                <field id="thumbnail" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Thumbnail Scene Id</label>
+                </field>                
+            </group>
+        </section>
+    </system>
+</config>

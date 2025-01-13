@@ -1,0 +1,20 @@
+{
+    "name": "netzkollektiv/veezue-importer",
+    "description": "Imports product images from Veezue",
+    "type": "magento2-module",
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Netzkollektiv\\VeezueImporter\\": ""
+        }
+    },
+    "authors": [
+        {
+            "name": "Dominik Krebs",
+            "email": "dominik.krebs@netzkollektiv.com"
+        }
+    ]
+}
