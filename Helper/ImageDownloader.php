@@ -23,20 +23,28 @@ class ImageDownloader
         $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
     }
 
-    private function isSkuAvailable ($sku) {
-        if ($this->availableSkus == null) { 
+    private function getExistingSku ($sku) {
+        if ($this->availableSkus == null) {
             $this->availableSkus = array_map(fn ($item) => $item['article_nr'], $this->info->getJson($this->info->buildUrl('get_datalist_materials.php', [
                 'cols' => 'article_nr'
             ]))['resultlist']);
+            print_r($this->availableSkus);
         }
-        return in_array($sku, $this->availableSkus);
+
+        $index = array_search($sku, $this->availableSkus);
+        if ($index !== false) {
+            return $this->availableSkus[$index];
+        }
+        return false;
     }
 
     public function getImageUrls($sku)
     {
         $imgUrls = [];
         
-        if (!$this->isSkuAvailable($sku)) {
+        $designerSku = $this->getExistingSku($sku);
+
+        if (!$designerSku) {
             return $imgUrls;
         }
 
@@ -49,7 +57,7 @@ class ImageDownloader
 
                 $imgUrl = $this->info->buildUrl('render_img_scene.php',[
                     'sid' => $sceneId,
-                    'artnr' => $sku,
+                    'artnr' => $designerSku,
                     'w' => 1920,
                     'h' => 1080
                 ]);
@@ -67,7 +75,7 @@ class ImageDownloader
                 $sceneId = 'material'.$suffix;
 
                 $imgUrl = $this->info->buildUrl('get_img_material.php', [
-                    'artnr' => $sku,
+                    'artnr' => $designerSku,
                     'w' => 1920,
                     'h' => 1080,
                     'show3d' => $show3d
