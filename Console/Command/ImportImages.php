@@ -27,7 +27,6 @@ class ImportImages extends Command
         private ImageDownloader $imageDownloader,
     ) {
         parent::__construct();
-        $appState->setAreaCode('adminhtml');
     }
 
     protected function configure()
@@ -38,6 +37,8 @@ class ImportImages extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->appState->setAreaCode('adminhtml');
+        
         $output->writeln("<info>Starting image import process...</info>");
         
         try {
